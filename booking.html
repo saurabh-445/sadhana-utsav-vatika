@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Enquiry - Sadhana Utsav Vatika</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<header class="navbar">
+    <a href="index.html" class="logo">
+        <span>SUV</span>
+        <div>
+            <strong>SADHANA</strong>
+            <small>UTSAV VATIKA</small>
+        </div>
+    </a>
+
+    <!-- ================= BACK BUTTON ================= -->
+<div class="back-button-container">
+    <a href="#" onclick="history.back(); return false;" class="back-button">
+        ← Back
+    </a>
+</div>
+
+    <nav class="nav-links" id="navLinks">
+        <a href="index.html" data-key="home">Home</a>
+        <a href="index.html#why-choose-us" data-key="whyChooseUs">Why Choose Us</a>
+        <a href="index.html#facilities" data-key="facilities">Facilities</a>
+        <a href="index.html#special-facilities" data-key="specialFacilities">Special Facilities</a>
+        <a href="index.html#gallery" data-key="gallery">Gallery</a>
+        <a href="booking.html" class="active-nav" data-key="bookingEnquiryNav">Booking Enquiry</a>
+        <a href="index.html#contact" data-key="contact">Contact</a>
+        <a href="about.html" data-key="aboutUs">About Us</a>
+    </nav>
+
+    <div class="nav-actions">
+        <div class="language-switch">
+            <button class="language active" id="hinglishBtn">Hinglish</button>
+            <button class="language" id="hindiBtn">हिंदी</button>
+        </div>
+        <a href="index.html#contact" class="nav-button" data-key="contactButton">Contact Us</a>
+        <button class="menu-button" id="menuButton">☰</button>
+    </div>
+</header>
+
+<!-- ================= MOBILE MENU ================= -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" data-key="home">Home</a>
+    <a href="index.html#why-choose-us" data-key="whyChooseUs">Why Choose Us</a>
+    <a href="index.html#facilities" data-key="facilities">Facilities</a>
+    <a href="index.html#special-facilities" data-key="specialFacilities">Special Facilities</a>
+    <a href="index.html#gallery" data-key="gallery">Gallery</a>
+    <a href="booking.html" class="active-nav" data-key="bookingEnquiryNav">Booking Enquiry</a>
+    <a href="index.html#contact" data-key="contact">Contact</a>
+    <a href="about.html" data-key="aboutUs">About Us</a>
+
+    <div class="mobile-language">
+        <button class="language active" id="mobileHinglishBtn">Hinglish</button>
+        <button class="language" id="mobileHindiBtn">हिंदी</button>
+    </div>
+
+    <a href="index.html#contact" class="nav-button" data-key="contactButton">Contact Us</a>
+</div>
+
+
+    <!-- ================= BOOKING BANNER ================= -->
+    <section class="about-page-hero">
+        <div class="hero-content">
+            <p class="section-label" data-key="calendarSubtitle">DATE AVAILABILITY</p>
+            <h1 data-key="calendarTitle">Check Lawn Availability</h1>
+            <p data-key="calendarDesc">Select a month and year to view booked dates for your upcoming celebration.</p>
+        </div>
+    </section>
+
+    <!-- ================= CALENDAR SECTION ================= -->
+    <section class="calendar-wrapper-section">
+        <div class="calendar-card">
+            
+            <div class="calendar-controls">
+    <div class="control-group">
+        <label for="monthSelect" data-key="selectMonthLabel">Select Month:</label>
+        <select id="monthSelect">
+            <option value="0">January</option>
+            <option value="1">February</option>
+            <option value="2">March</option>
+            <option value="3">April</option>
+            <option value="4">May</option>
+            <option value="5">June</option>
+            <option value="6">July</option>
+            <option value="7">August</option>
+            <option value="8" selected>September</option>
+            <option value="9">October</option>
+            <option value="10">November</option>
+            <option value="11">December</option>
+        </select>
+    </div>
+    <div class="control-group">
+        <label for="yearSelect" data-key="selectYearLabel">Select Year:</label>
+        <select id="yearSelect">
+            <option value="2026" selected>2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+            <option value="2029">2029</option>
+            <option value="2030">2030</option>
+        </select>
+    </div>
+</div>
+
+            <!-- Calendar Display -->
+            <div class="calendar-header-title">
+                <h3 id="currentCalendarDisplay">Month Year</h3>
+            </div>
+
+            <div class="calendar-grid" id="calendarGrid">
+                <!-- Day headers and numbers rendered dynamically -->
+            </div>
+
+            <!-- ================= CALENDAR LEGEND ================= -->
+<div class="calendar-legend">
+    <div class="legend-item">
+        <span class="booked-badge badge-afternoon">✓</span>
+        <span data-key="legendAfternoon">Afternoon Booked</span>
+    </div>
+    <div class="legend-item">
+        <span class="booked-badge badge-night">✓</span>
+        <span data-key="legendNight">Night Booked</span>
+    </div>
+</div>
+
+            <!-- Legend -->
+            
+                <div class="legend-item">
+                    <span class="legend-box available-box"></span>
+                    <span data-key="legendAvailable">Available for Booking</span>
+                </div>
+            
+
+            <div class="calendar-notice">
+                <p data-key="calendarNote">To reserve an available date or verify booking procedures, please reach out via our contact options below.</p>
+            </div>
+
+        
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="footer">
+        <div>
+            <strong>SADHANA UTSAV VATIKA</strong>
+            <p data-key="footerText">Celebrating your special moments with elegance.</p>
+        </div>
+        <p>&copy; 2026 SADHANA UTSAV VATIKA. All rights reserved.</p>
+    </footer>
+    
+        <!-- ================= LIGHTBOX POPUP ================= -->
+    <div id="lightbox" class="lightbox-overlay">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Full Screen Image">
+    </div>
+
+    <script src="js/script.js"></script>
+
+</body>
+</html>

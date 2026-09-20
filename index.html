@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <!-- Makes the website responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Browser tab title -->
+    <title>Sadhana Utsav Vatika | Marriage Hall</title>
+
+    <!-- Connect CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+      <!-- Logo -->
+      <a href="index.html" class="logo">
+        <span>SUV</span>
+
+        <div>
+          <strong>SADHANA</strong>
+          <small>UTSAV VATIKA</small>
+        </div>
+      </a>
+
+      <!-- Navigation -->
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="active-nav" data-key="home"> Home </a>
+
+        <a href="index.html#why-choose-us" data-key="whyChooseUs">
+          Why Choose Us
+        </a>
+
+        <a href="index.html#facilities" data-key="facilities"> Facilities </a>
+
+        <a href="index.html#special-facilities" data-key="specialFacilities">
+          Special Facilities
+        </a>
+
+        <a href="index.html#gallery" data-key="gallery"> Gallery </a>
+
+        <a href="booking.html" data-key="bookingEnquiryNav">
+          Booking Enquiry
+        </a>
+
+        <a href="index.html#contact" data-key="contact"> Contact </a>
+
+        <a href="about.html" data-key="aboutUs"> About Us </a>
+      </nav>
+
+      <!-- Right side actions -->
+      <div class="nav-actions">
+        <!-- Language selection -->
+        <div class="language-switch">
+          <button id="hinglishBtn" class="language active">Hinglish</button>
+
+          <button id="hindiBtn" class="language">हिन्दी</button>
+        </div>
+
+        <!-- Main CTA -->
+        <a href="#contact" class="nav-button" data-key="bookTour">
+          Book a Tour
+        </a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <button class="menu-button" id="menuButton">☰</button>
+    </header>
+    <section class="hero-section">
+    <div class="hero-image-container">
+        <img src="images/home/hero-1.png" alt="Sadhana Utsav Vatika Front View" style="width: 100%; object-fit: cover;">
+    </div>
+</section>
+
+    <!-- ================= MOBILE MENU ================= -->
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html" class="active-nav" data-key="home"> Home </a>
+
+      <a href="index.html#why-choose-us" data-key="whyChooseUs">
+        Why Choose Us
+      </a>
+
+      <a href="index.html#facilities" data-key="facilities"> Facilities </a>
+
+      <a href="index.html#special-facilities" data-key="specialFacilities">
+        Special Facilities
+      </a>
+
+      <a href="index.html#gallery" data-key="gallery"> Gallery </a>
+
+      <a href="booking.html" data-key="bookingEnquiryNav"> Booking Enquiry </a>
+
+      <a href="index.html#contact" data-key="contact"> Contact </a>
+
+      <a href="about.html" data-key="aboutUs"> About Us </a>
+
+      <!-- Mobile language selection -->
+
+      <div class="mobile-language">
+        <button id="mobileHinglishBtn" class="language active">Hinglish</button>
+
+        <button id="mobileHindiBtn" class="language">हिन्दी</button>
+      </div>
+
+      <!-- Mobile CTA -->
+
+      <a href="#contact" class="nav-button" data-key="bookTour">
+        Book a Tour
+      </a>
+    </div>
+
+    <!-- ================= HERO ================= -->
+
+    <main>
+      <section class="hero" id="home">
+        <div class="hero-content">
+          <p class="hero-label" data-key="heroLabel">
+            A Celebration Worth Remembering
+          </p>
+
+          <h1 data-key="heroTitle">
+            Aapke Sapno Ki Shaadi, Ek Khoobsurat Jagah Par.
+          </h1>
+
+          <p class="hero-description" data-key="heroDescription">
+            Sadhana Utsav Vatika mein apne special moments ko ek grand aur
+            yaadgaar celebration mein badaliye.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#contact" class="primary-button" data-key="heroButton">
+              Book a Tour
+            </a>
+
+            <a
+              href="#gallery"
+              class="secondary-button"
+              data-key="galleryButton"
+            >
+              View Gallery
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero highlights -->
+        <div class="hero-info">
+          <div>
+            <strong>01</strong>
+            <span data-key="heroInfo1"> Beautiful Venue </span>
+          </div>
+
+          <div>
+            <strong>02</strong>
+            <span data-key="heroInfo2"> Elegant Celebrations </span>
+          </div>
+
+          <div>
+            <strong>03</strong>
+            <span data-key="heroInfo3"> Memorable Moments </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= WHY CHOOSE US ================= -->
+
+      <section class="capacity-section" id="why-choose-us">
+        <div class="section-heading">
+          <p class="section-label" data-key="whyChooseLabel">WHY CHOOSE US</p>
+
+          <h2 data-key="whyChooseTitle">Har Celebration Ke Liye Taiyaar</h2>
+
+          <p data-key="whyChooseDescription">
+            Shaadi, reception ya kisi bhi khaas occasion ke liye ek comfortable
+            aur elegant space.
+          </p>
+        </div>
+
+        <div class="capacity-grid">
+          <!-- Guest capacity -->
+
+          <div class="capacity-card">
+            <div class="card-icon">♧</div>
+
+            <h3>2000+</h3>
+
+            <p data-key="guests">Guests Capacity</p>
+          </div>
+
+          <!-- Main Hall -->
+
+          <a href="spaces/main-hall.html" class="capacity-card clickable-card">
+            <div class="card-icon">✦</div>
+            <div class="space-image">
+    <img src="images/main-hall/main hall.png" alt="Main Hall" style="width: 100%; border-radius: 8px;" loading="lazy">
+</div>
+
+            <h3 data-key="mainHallTitle">Main Hall</h3>
+            <p data-key="mainHall">Grand & Spacious</p>
+
+            <span class="card-link" data-key="exploreSpace"> Explore → </span>
+          </a>
+
+          <!-- Dining -->
+
+          <a href="spaces/dining.html" class="capacity-card clickable-card">
+            <div class="card-icon">♢</div>
+            <div class="space-image">
+    <img src="images/dining/dining.png" alt="Dining Venue" style="width: 100%; border-radius: 8px;" loading="lazy">
+</div>
+
+            <h3 data-key="diningTitle">Dining</h3>
+
+            <p data-key="dining">Separate Dining Space</p>
+
+            <span class="card-link" data-key="exploreSpace"> Explore → </span>
+          </a>
+
+          <!-- Stage -->
+
+          <a href="spaces/stage.html" class="capacity-card clickable-card">
+            <div class="card-icon">❋</div>
+            <div class="space-image">
+          <img src="images/stage/stage-9.jpeg" alt="Stage" style="width: 100%; border-radius: 8px;" loading="lazy">
+</div>
+
+            <h3 data-key="StageTitle">Stage</h3>
+
+            <p data-key="Stage">Outdoor Celebration Area</p>
+
+            <span class="card-link" data-key="exploreSpace"> Explore → </span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ================= FACILITIES ================= -->
+
+      <section class="amenities-section" id="facilities">
+        <div class="section-heading">
+          <p class="section-label" data-key="amenitiesLabel">
+            EVERYTHING YOU NEED
+          </p>
+
+          <h2 data-key="amenitiesTitle">Aapke Comfort Ka Poora Dhyaan</h2>
+
+          <p data-key="facilitiesMainDescription">
+            Aapke special occasion ko comfortable, convenient aur memorable
+            banane ke liye thoughtfully planned facilities.
+          </p>
+        </div>
+
+        <!-- ================= FACILITY CARDS ================= -->
+
+        <div class="amenities-grid">
+          <!-- AIR CONDITIONING -->
+
+          <div class="amenity-card">
+            <div class="amenity-icon">❄</div>
+
+            <h3 data-key="acTitle">Air Conditioning</h3>
+
+            <p data-key="acDescription">
+              Comfortable atmosphere for your guests.
+            </p>
+          </div>
+
+          <!-- VALET PARKING -->
+
+          <a href="#valet-parking" class="amenity-card facility-clickable">
+            <div class="amenity-icon">P</div>
+
+            <h3 data-key="parkingTitle">Valet Parking</h3>
+
+            <p data-key="parkingDescription">
+              Convenient parking arrangements for guests.
+            </p>
+
+            <span class="facility-card-link" data-key="facilityExplore">
+              Explore →
+            </span>
+          </a>
+
+          <!-- BRIDAL ROOM -->
+
+          <a href="#bridal-room" class="amenity-card facility-clickable">
+            <div class="amenity-icon">♡</div>
+
+            <h3 data-key="bridalTitle">Bridal Room</h3>
+
+            <p data-key="bridalDescription">
+              A private space for the bride and family.
+            </p>
+
+            <span class="facility-card-link" data-key="facilityExplore">
+              Explore →
+            </span>
+          </a>
+
+          <!-- Seating Arena-->
+
+          <a href="#seating-arena" class="amenity-card facility-clickable">
+  <div class="amenity-icon">🪑</div>
+  <h3 data-key="seatingArenaTitle">Seating Arena</h3>
+  <p data-key="seatingArenaDescription">
+    Comfortable and spacious seating arrangements for your guests.
+  </p>
+  <span class="facility-card-link" data-key="facilityExplore">
+    Explore →
+  </span>
+</a>
+        </div>
+      </section>
+
+      <!-- ================================================= -->
+      <!-- ================= VALET PARKING ================= -->
+      <!-- ================================================= -->
+
+      <section class="facility-detail-section" id="valet-parking">
+        <div class="facility-detail-content">
+          <div class="section-heading">
+            <p class="section-label" data-key="valetLabel">VALET PARKING</p>
+
+            <h2 data-key="valetTitle">
+              Parking Made Comfortable For Your Guests
+            </h2>
+
+            <p data-key="valetDescription">
+              Event ke dauraan guests ke arrival aur parking experience ko
+              convenient aur organised rakhne ke liye parking assistance
+              available hai.
+            </p>
+          </div>
+
+          <div class="facility-details-box">
+            <h3 data-key="valetPointsTitle">What You Can Expect</h3>
+
+            <ul>
+              <li data-key="valetPoint1">
+                Guests ke arrival ke time parking assistance available rahegi.
+              </li>
+
+              <li data-key="valetPoint2">
+                Parking process ko organised rakhne ki koshish ki jaati hai.
+              </li>
+
+              <li data-key="valetPoint3">
+                Family aur senior guests ke liye arrival experience ko
+                convenient banane par focus kiya jaata hai.
+              </li>
+
+              <li data-key="valetPoint4">
+                Event ke busy hours mein parking coordination mein support diya
+                ja sakta hai.
+              </li>
+
+              <li data-key="valetPoint5">
+                Guests ko venue tak pahunchne mein unnecessary difficulty na ho,
+                iska dhyaan rakha jaata hai.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- VALET PARKING IMAGES -->
+
+        <div class="facility-gallery">
+          <div class="facility-gallery-heading">
+            <p class="section-label" data-key="valetGalleryLabel">
+              VALET PARKING GALLERY
+            </p>
+
+            <h3 data-key="valetGalleryTitle">
+              A Convenient Arrival Experience
+            </h3>
+          </div>
+
+          <div class="facility-gallery-grid">
+            <div class="facility-image">
+               <img src="images/valet-parking/valet-1.png" alt="Two Wheelers" loading="lazy">
+            </div>
+            <div class="facility-image">
+              <img src="images/valet-parking/valet-2.jpeg" alt="Valet parking area" />
+            </div>
+        </div>
+      </section>
+
+      <!-- ================================================= -->
+      <!-- ================== BRIDAL ROOM ================== -->
+      <!-- ================================================= -->
+
+      <section class="facility-detail-section alternate" id="bridal-room">
+        <div class="facility-detail-content">
+          <div class="section-heading">
+            <p class="section-label" data-key="bridalLabel">BRIDAL ROOM</p>
+
+            <h2 data-key="bridalDetailTitle">
+              A Private Space For The Bride And Family
+            </h2>
+
+            <p data-key="bridalDetailDescription">
+              Shaadi ke important moments ke beech bride aur family ke liye ek
+              private aur comfortable space jahan preparation aur personal
+              moments peacefully enjoy kiye ja sakein.
+            </p>
+          </div>
+
+          <div class="facility-details-box">
+            <h3 data-key="bridalPointsTitle">Bridal Room Features</h3>
+
+            <ul>
+              <li data-key="bridalPoint1">
+                Bride aur family ke liye private space.
+              </li>
+
+              <li data-key="bridalPoint2">
+                Wedding preparation ke liye comfortable environment.
+              </li>
+
+              <li data-key="bridalPoint3">
+                Personal belongings aur preparation essentials rakhne ke liye
+                convenient space.
+              </li>
+
+              <li data-key="bridalPoint4">
+                Ceremony ke beech bride ko privacy aur relaxation ka
+                opportunity.
+              </li>
+
+              <li data-key="bridalPoint5">
+                Makeup, dressing aur final preparation ke liye useful space.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- BRIDAL ROOM IMAGES -->
+
+        <div class="facility-gallery">
+          <div class="facility-gallery-heading">
+            <p class="section-label" data-key="bridalGalleryLabel">
+              BRIDAL ROOM GALLERY
+            </p>
+
+            <h3 data-key="bridalGalleryTitle">A Space For Special Moments</h3>
+          </div>
+
+          <div class="facility-gallery-grid">
+            <div class="facility-image">
+              <img src="images/bridal-room/room-1.png" alt="special entry" loading="lazy">
+            </div>
+
+            <div class="facility-image">
+              <img src="images/bridal-room/room-2.jpg.jpeg" alt="Bridal room interior" loading="lazy">
+            </div>
+
+            <div class="facility-image">
+              <img src="images/bridal-room/room-3.jpeg" alt="Bridal preparation space"/>
+            </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================= -->
+      <!-- ==================== Seating-Arena=================== -->
+      <!-- ================================================= -->
+
+    <section class="facility-detail-section" id="seating-arena">
+  <div class="facility-detail-content">
+    <div class="section-heading">
+      <p class="section-label" data-key="seatingArenaLabel">SEATING ARENA</p>
+      <h2 data-key="seatingArenaDetailTitle">
+        Comfortable Seating For Your Guests
+      </h2>
+      <p data-key="seatingArenaDetailDescription">
+        Spacious and well-arranged seating designed to keep your guests comfortable throughout the celebration.
+      </p>
+    </div>
+
+    <div class="facility-details-box">
+      <h3 data-key="seatingArenaPointsTitle">Seating Arrangements</h3>
+      <ul>
+        <li data-key="seatingArenaPoint1">Spacious seating layout for all guests.</li>
+        <li data-key="seatingArenaPoint2">Comfortable sofa and chair arrangements.</li>
+        <li data-key="seatingArenaPoint3">Clear line of sight to the main stage.</li>
+        <li data-key="seatingArenaPoint4">Dedicated VIP and family seating sections.</li>
+        <li data-key="seatingArenaPoint5">Wide pathways for hassle-free movement.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Gallery Section -->
+  <div class="facility-gallery">
+    <div class="facility-gallery-heading">
+      <p class="section-label" data-key="seatingArenaGalleryLabel">
+        SEATING ARENA GALLERY
+      </p>
+      <h3 data-key="seatingArenaGalleryTitle">Comfortable Guest Experience</h3>
+    </div>
+
+          <div class="facility-gallery-grid">
+            <div class="facility-image">
+              <img src="images/seating-arena/seating-1.jpg" alt="Stage" loading="lazy">
+            </div>
+
+            <div class="facility-image">
+              <img src="images/seating-arena/seating-2.jpeg" alt="Stage" loading="lazy">
+            </div>
+
+            <div class="facility-image">
+            <video 
+              controls 
+              preload="none" 
+              poster="images/seating-arena/seating-1.jpg"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+              <source src="images/seating-arena/seating-3.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+            <div class="facility-image">
+            <video 
+              controls 
+              preload="none" 
+              poster="images/seating-arena/seating-11.png"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+              <source src="images/seating-arena/seating-4.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= SPECIAL FACILITIES ================= -->
+      <section id="special-facilities" class="special-facilities-section">
+        <h2 data-key="specialFacilitiesHeading">Special Facilities</h2>
+
+        <ul class="sf-bullet-list">
+          <li data-key="sfNote1">
+            24/7 Uninterrupted Power Backup with silent generators.
+          </li>
+          <li data-key="sfNote2">
+            Fully air-conditioned VIP Bridal Suite with attached washroom.
+          </li>
+          <li data-key="sfNote3">
+            Spacious and secure valet parking for up to 200 vehicles.
+          </li>
+          <li data-key="sfNote4">
+            High-speed Wi-Fi access available throughout the venue.
+          </li>
+          <li data-key="sfNote5">
+            Dedicated professional security personnel and CCTV surveillance.
+          </li>
+          <li data-key="sfNote6">
+            In-house premium catering and customizable food menu options.
+          </li>
+        </ul>
+      </section>
+
+      <!-- ================= GALLERY ================= -->
+
+      <section class="gallery-section" id="gallery">
+        <div class="section-heading gallery-heading">
+          <div>
+            <p class="section-label" data-key="galleryLabel">OUR MOMENTS</p>
+
+            <h2 data-key="galleryTitle">Jahan Har Tasveer Ek Yaad Ban Jaaye</h2>
+          </div>
+
+          <p data-key="galleryDescription">
+            Venue, stage, seating aur celebrations ki kuch khaas jhalakiyan.
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-item large">
+            <img src="images/gallery/gallery-1.jpg.png" alt="Main Hall" loading="lazy">
+          </div>
+
+          <div class="gallery-item">
+           <img src="images/gallery/gallery-2.jpg.png" alt="Afternoon decoration" loading="lazy">
+          </div>
+
+          <div class="gallery-item">
+            <img src="images/gallery/gallery-3.jpg.png" alt="Stage sitting Area" loading="lazy">
+          </div>
+
+          <div class="gallery-item">
+          <img src="images/gallery/gallery-4jpg.png" alt="Gifts" loading="lazy">
+          </div>
+
+          <div class="gallery-item">
+          <img src="images/gallery/gallery-5.jpeg" alt="Lawn View" loading="lazy">
+            </div>
+
+          <div class="gallery-item">
+            <img src="images/gallery/gallery-6.png" alt="Stage"  loading="lazy">  
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= CONTACT ================= -->
+
+      <section class="contact-section" id="contact">
+        <div class="contact-content">
+          <p class="section-label" data-key="contactLabel">
+            PLAN YOUR CELEBRATION
+          </p>
+
+          <h2 data-key="contactTitle">Aapka Special Day Yahin Se Shuru Ho.</h2>
+
+          <p data-key="contactDescription">
+            Venue visit karne ya booking enquiry ke liye humse contact karein.
+          </p>
+
+        </div>
+      </section>
+      <section class="contact-details-section">
+    <div class="contact-grid">
+        
+        <!-- Left Side: Contact Information -->
+        <div class="contact-info-box">
+            <h3 data-key="contactHeading">Get in Touch</h3>
+            
+            <!-- 1. Direct Phone Numbers -->
+            <div class="contact-item">
+                <span class="icon">📞</span>
+                <div>
+                    <p><strong data-key="callUs">Call Us</strong></p>
+                    <a href="tel:+919450312680">+91 94503 12680</a> <br>
+                    <a href="tel:+918423207614">+91 84232 07614</a> 
+                </div>
+            </div>
+
+            <!-- 2. WhatsApp Link -->
+            <div class="contact-item">
+                <span class="icon">💬</span>
+                <div>
+                    <p><strong data-key="whatsappTitle">WhatsApp</strong></p>
+                    <a href="https://wa.me/919450312680" target="_blank" class="whatsapp-link" data-key="whatsappDesc">Message us for booking & pricing</a>
+                </div>
+            </div>
+
+            <!-- 3. Physical Address -->
+            <div class="contact-item">
+                <span class="icon">📍</span>
+                <div>
+                    <p><strong data-key="addressTitle">Address</strong></p>
+                    <p>Sadhana Utsav Vatika,<br>SMPAI Inter College Rd,<br>Bakiabad, Bharwal, Uttar Pradesh 231304</p>
+                </div>
+            </div>
+
+            <!-- 4. Visiting Hours -->
+            <div class="contact-item">
+                <span class="icon">🕒</span>
+                <div>
+                    <p><strong data-key="visitingHoursTitle">Venue Visit Timings</strong></p>
+                    <p data-key="visitingHoursDesc">07:00 AM to 07:00 PM (Open All Days)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Google Map -->
+        <div class="contact-map-box">
+            <!-- 5. Embedded Google Map -->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3612.391910792017!2d82.90012597516096!3d25.122437777759185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x398fcb24d052308f%3A0x2db78fad3b9420a7!2sSadhana%20utsav%20vatika!5e0!3m2!1sen!2sin!4v1789829232376!5m2!1sen!2sin" 
+                width="100%" 
+                height="100%" 
+                style="border:0; border-radius: 8px; min-height: 350px;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+
+    </div>
+</section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+      <div>
+        <strong> SADHANA UTSAV VATIKA </strong>
+
+        <p data-key="footerText">
+          Celebrating your special moments with elegance.
+        </p>
+      </div>
+
+      <p>© 2026 Sadhana Utsav Vatika</p>
+    </footer>
+    
+    <!-- ================= LIGHTBOX POPUP ================= -->
+<div id="lightbox" class="lightbox-overlay">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="Full Screen Image">
+</div>
+    <!-- Connect JavaScript -->
+    <script src="js/script.js"></script>
+
+
+  </body>
+</html>
