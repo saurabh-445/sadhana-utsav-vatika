@@ -7,13 +7,6 @@ let activeLanguage =
 /* ================= MANUAL BOOKED DATES ================= */
 // Set each date to either "afternoon" or "night"
 const bookedDates = {
-    "2026-10-12": "afternoon",
-    "2026-10-24": "night",
-    "2026-11-05": "afternoon",
-    "2026-11-18": "night",
-    "2026-12-08": "afternoon",
-    "2027-01-18": "night",
-    "2027-02-14": "afternoon"
 };
 
 /* ================= CALENDAR LOCALIZATION DATA ================= */
