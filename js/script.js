@@ -52,7 +52,7 @@ const translations = {
             "Aapke Sapno Ki Shaadi, Ek Khoobsurat Jagah Par.",
 
         heroDescription:
-            "Sadhana Utsav Vartika mein apne special moments ko ek grand aur yaadgaar celebration mein badaliye.",
+            "Sadhana Utsav Vatika mein apne special moments ko ek grand aur yaadgaar celebration mein badaliye.",
 
         heroButton:
             "Book a Tour",
@@ -475,7 +475,7 @@ visitingHoursDesc: "07:00 AM to 07:00 PM (Open All Days)"
             "आपके सपनों की शादी, एक खूबसूरत जगह पर।",
 
         heroDescription:
-            "साधना उत्सव वार्तिका में अपने खास पलों को एक भव्य और यादगार उत्सव में बदलें।",
+            "साधना उत्सव वाटिका में अपने खास पलों को एक भव्य और यादगार उत्सव में बदलें।",
 
         heroButton:
             "भ्रमण बुक करें",
