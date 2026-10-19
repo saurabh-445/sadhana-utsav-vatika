@@ -1281,3 +1281,10 @@ img {
         grid-template-columns: 1fr;
     }
 }
+/* Past dates: dimmed, strikethrough, unclickable */
+.calendar-day-box.is-past {
+    opacity: 0.35;
+    cursor: not-allowed;
+    text-decoration: line-through;
+    pointer-events: none;
+}

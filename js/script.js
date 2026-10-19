@@ -1,6 +1,8 @@
 /* ================= CALENDAR STATE ================= */
-let activeCalYear = 2026;
-let activeCalMonth = 8; // September (0-indexed: 0 = Jan, 8 = Sep)
+// Automatically anchored to today's real-world date
+const realToday = new Date();
+let activeCalYear = realToday.getFullYear();
+let activeCalMonth = realToday.getMonth(); // 0 = Jan, 9 = Oct, etc.
 let activeLanguage =
     localStorage.getItem("selectedLanguage") || "hinglish";
 
@@ -1067,13 +1069,39 @@ if (savedLanguage === "hindi") {
 }
 
 /* ================= CALENDAR ENGINE ================= */
-
 function setupCalendarDropdowns() {
     const monthSelect = document.getElementById("monthSelect");
     const yearSelect = document.getElementById("yearSelect");
     if (!monthSelect || !yearSelect) return;
 
-    // Update month names dynamically if language changes
+    const currentYear = realToday.getFullYear();
+    const currentMonth = realToday.getMonth();
+
+    // 1. Lock past years
+    Array.from(yearSelect.options).forEach(opt => {
+        if (parseInt(opt.value) < currentYear) {
+            opt.disabled = true;
+        }
+    });
+
+    // 2. Set dropdown defaults to the current real-world month & year
+    monthSelect.value = String(activeCalMonth);
+    yearSelect.value = String(activeCalYear);
+
+    // 3. Helper to disable past months
+    function refreshDisabledMonths() {
+        Array.from(monthSelect.options).forEach((opt, idx) => {
+            if (activeCalYear === currentYear && idx < currentMonth) {
+                opt.disabled = true; // Lock months earlier than current month
+            } else if (activeCalYear < currentYear) {
+                opt.disabled = true;
+            } else {
+                opt.disabled = false;
+            }
+        });
+    }
+
+    // 4. Localize month names if language changes
     if (typeof calendarI18n !== "undefined" && calendarI18n[activeLanguage]) {
         const months = calendarI18n[activeLanguage].months;
         Array.from(monthSelect.options).forEach((opt, idx) => {
@@ -1081,13 +1109,37 @@ function setupCalendarDropdowns() {
         });
     }
 
+    refreshDisabledMonths();
+
+    // Dropdown change handlers
     monthSelect.onchange = (e) => {
-        activeCalMonth = parseInt(e.target.value);
+        const chosenMonth = parseInt(e.target.value);
+        if (activeCalYear === currentYear && chosenMonth < currentMonth) {
+            monthSelect.value = String(currentMonth);
+            activeCalMonth = currentMonth;
+        } else {
+            activeCalMonth = chosenMonth;
+        }
         renderCalendar();
     };
 
     yearSelect.onchange = (e) => {
-        activeCalYear = parseInt(e.target.value);
+        const chosenYear = parseInt(e.target.value);
+        if (chosenYear < currentYear) {
+            yearSelect.value = String(currentYear);
+            activeCalYear = currentYear;
+        } else {
+            activeCalYear = chosenYear;
+        }
+
+        refreshDisabledMonths();
+
+        // If user switches back to current year and was on a past month, reset to current month
+        if (activeCalYear === currentYear && activeCalMonth < currentMonth) {
+            activeCalMonth = currentMonth;
+            monthSelect.value = String(currentMonth);
+        }
+
         renderCalendar();
     };
 }
@@ -1106,6 +1158,7 @@ function renderCalendar() {
         titleEl.textContent = `${monthNames[activeCalMonth]} ${activeCalYear}`;
     }
 
+    // Render Weekday Headers
     weekdays.forEach(day => {
         const headerDiv = document.createElement("div");
         headerDiv.className = "calendar-weekday";
@@ -1116,12 +1169,17 @@ function renderCalendar() {
     const firstDayIndex = new Date(activeCalYear, activeCalMonth, 1).getDay();
     const totalDays = new Date(activeCalYear, activeCalMonth + 1, 0).getDate();
 
+    // Empty spacers before the 1st day
     for (let i = 0; i < firstDayIndex; i++) {
         const emptyDiv = document.createElement("div");
         emptyDiv.className = "calendar-day-box empty";
         grid.appendChild(emptyDiv);
     }
 
+    // Normalized today midnight timestamp for comparison
+    const midnightToday = new Date(realToday.getFullYear(), realToday.getMonth(), realToday.getDate()).getTime();
+
+    // Render Day Boxes
     for (let day = 1; day <= totalDays; day++) {
         const dayDiv = document.createElement("div");
         dayDiv.className = "calendar-day-box";
@@ -1130,20 +1188,25 @@ function renderCalendar() {
         const formattedDay = String(day).padStart(2, "0");
         const dateKey = `${activeCalYear}-${formattedMonth}-${formattedDay}`;
 
-        // STEP 4 UPDATE: Check the dictionary for 'afternoon' or 'night'
+        const cellTime = new Date(activeCalYear, activeCalMonth, day).getTime();
         const bookingType = bookedDates[dateKey];
 
-        if (bookingType) {
+        // 1. Past dates in the current month
+        if (cellTime < midnightToday) {
+            dayDiv.classList.add("is-past");
+            dayDiv.innerHTML = `<span class="day-num">${day}</span>`;
+        }
+        // 2. Booked dates
+        else if (bookingType) {
             dayDiv.classList.add("is-booked");
-            
-            // Assign the correct color class based on the time of day
             const badgeClass = bookingType === "afternoon" ? "badge-afternoon" : "badge-night";
-            
             dayDiv.innerHTML = `
                 <span class="day-num">${day}</span>
                 <span class="booked-badge ${badgeClass}">✓</span>
             `;
-        } else {
+        }
+        // 3. Available upcoming dates
+        else {
             dayDiv.innerHTML = `<span class="day-num">${day}</span>`;
         }
 
