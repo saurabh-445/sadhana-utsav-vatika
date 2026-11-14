@@ -1314,3 +1314,67 @@ window.addEventListener('pageshow', function (event) {
         window.location.reload();
     }
 });
+// Play/Pause and expand video on the very first tap anywhere on the frame
+document.querySelectorAll('video').forEach(video => {
+    // 1. Hide native controls while in thumbnail view so the browser doesn't block the first tap
+    video.removeAttribute('controls');
+
+    // 2. Tap anywhere on the video surface to play/pause immediately
+    video.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        // Only manually toggle when in thumbnail mode (once expanded, native controls handle it)
+        if (!video.classList.contains('playing-popup')) {
+            video.play();
+        }
+    });
+
+    // 3. Also allow clicking the parent container (if any padding/wrapper is clicked)
+    const parent = video.parentElement;
+    if (parent && !parent.classList.contains('gallery-grid')) {
+        parent.addEventListener('click', (e) => {
+            if (e.target !== video && video.paused) {
+                video.play();
+            }
+        });
+    }
+
+    // 4. When video starts playing: pop out to original ratio and enable controls
+    video.addEventListener('play', () => {
+        // Pause any other playing videos first
+        document.querySelectorAll('video.playing-popup').forEach(otherVideo => {
+            if (otherVideo !== video) {
+                otherVideo.pause();
+            }
+        });
+
+        video.classList.add('playing-popup');
+        video.setAttribute('controls', 'controls');
+    });
+
+    // 5. When ended, return back to the grid thumbnail and hide controls again
+    video.addEventListener('ended', () => {
+        video.classList.remove('playing-popup');
+        video.removeAttribute('controls');
+    });
+});
+
+// Close the popped-out video when clicking anywhere outside of it or pressing Escape
+document.addEventListener('click', (e) => {
+    const activeVideo = document.querySelector('video.playing-popup');
+    if (activeVideo && !activeVideo.contains(e.target)) {
+        activeVideo.pause();
+        activeVideo.classList.remove('playing-popup');
+        activeVideo.removeAttribute('controls');
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('video.playing-popup').forEach(v => {
+            v.pause();
+            v.classList.remove('playing-popup');
+            v.removeAttribute('controls');
+        });
+    }
+});

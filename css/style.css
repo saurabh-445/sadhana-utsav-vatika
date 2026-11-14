@@ -21,7 +21,8 @@ a {
     color: inherit;
 }
 
-img {
+img,
+video {
     width: 100%;
     display: block;
 }
@@ -407,31 +408,79 @@ img {
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 15px;
 }
 
-.gallery-item {
-    height: 240px;
+/* Uniform frame size for all gallery items, images, videos & posters (overrides any full-width inline styles) */
+.gallery-item,
+.gallery-item.large,
+.gallery-grid > div,
+.gallery-grid > video {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+    width: 100% !important;
+    aspect-ratio: 4 / 3;
+    height: 260px !important;
     overflow: hidden;
-    background: #ddd4ca;
+    background: #eae3dc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    position: relative;
 }
 
-.gallery-item.large {
-    grid-row: span 2;
-    height: 492px;
+.gallery-item img,
+.gallery-item video,
+.gallery-grid > div > video,
+.gallery-grid > video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    transition: transform 0.4s ease;
+    cursor: pointer;
 }
 
-.gallery-item img {
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s;
+.gallery-item:hover img,
+.gallery-item:hover video,
+.gallery-grid > video:hover {
+    transform: scale(1.03);
 }
 
-.gallery-item:hover img {
-    transform: scale(1.05);
+/* Clean Play Button Badge on Video Thumbnails */
+.gallery-item:has(video)::after,
+.space-image:has(video)::after,
+.facility-image:has(video)::after {
+    content: "▶";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 52px;
+    height: 52px;
+    background: rgba(25, 20, 18, 0.72);
+    color: #ffffff;
+    border: 2px solid #b99560;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    padding-left: 3px;
+    pointer-events: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+    transition: 0.3s ease;
 }
 
-/* ================= LIGHTBOX POPUP ================= */
+.gallery-item:has(video):hover::after,
+.space-image:has(video):hover::after,
+.facility-image:has(video):hover::after {
+    background: #a87939;
+    border-color: #ffffff;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* ================= LIGHTBOX & ACTIVE MEDIA POPUP ================= */
 .lightbox-overlay {
     display: none;
     position: fixed;
@@ -440,19 +489,54 @@ img {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
+    padding: 40px;
+    background-color: rgba(0, 0, 0, 0.88);
     align-items: center;
     justify-content: center;
 }
 
-.lightbox-overlay img {
-    max-width: 90%;
-    max-height: 90%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
+/* Original aspect ratio (16:9, 9:16, etc.) preserved without taking the full screen */
+.lightbox-overlay img,
+.lightbox-overlay video {
+    width: auto !important;
+    height: auto !important;
+    max-width: 80vw !important;
+    max-height: 80vh !important;
+    object-fit: contain !important;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6);
+    background: #000;
+}
+
+/* When an inline video is played directly or expanded, show full original ratio without filling screen */
+video.playing,
+video.active-video,
+video.playing-popup {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 80vw !important;
+    max-height: 80vh !important;
+    object-fit: contain !important;
+    z-index: 9999 !important;
+    background: #000 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.85), 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Native fullscreen video safeguard so 16:9 and 9:16 videos are never cropped */
+video:fullscreen,
+video:-webkit-full-screen {
+    width: auto !important;
+    height: auto !important;
+    max-width: 85vw !important;
+    max-height: 85vh !important;
+    margin: auto !important;
+    object-fit: contain !important;
+    background: #000;
 }
 
 .lightbox-close {
@@ -463,6 +547,7 @@ img {
     font-size: 40px;
     font-weight: bold;
     cursor: pointer;
+    z-index: 10000;
 }
 
 .lightbox-close:hover {
@@ -522,11 +607,15 @@ img {
 
 .person-image {
     height: 500px;
-    background: #ddd4ca;
+    background: #1f1b19;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.person-image img {
+.person-image img,
+.person-image video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -648,21 +737,37 @@ img {
     gap: 20px;
 }
 
-.space-image {
-    overflow: hidden;
-    background: #f5f1ec;
+/* Identical frame sizes for space images, videos & posters */
+.space-image,
+.space-gallery-grid > video {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+    width: 100% !important;
+    height: 240px !important;
     aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #eae3dc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    position: relative;
 }
 
-.space-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.space-image img,
+.space-image video,
+.space-gallery-grid > video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
     transition: transform 0.4s ease;
+    cursor: pointer;
 }
 
-.space-image:hover img {
-    transform: scale(1.05);
+.space-image:hover img,
+.space-image:hover video,
+.space-gallery-grid > video:hover {
+    transform: scale(1.03);
 }
 
 /* Clickable Cards & Facilities */
@@ -751,22 +856,37 @@ img {
     gap: 15px;
 }
 
-.facility-image {
-    width: 100%;
+/* Identical frame sizes for facility images, videos & posters */
+.facility-image,
+.facility-gallery-grid > video {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+    width: 100% !important;
+    height: 240px !important;
     aspect-ratio: 4 / 3;
     overflow: hidden;
-    background: #ddd4ca;
+    background: #eae3dc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    position: relative;
 }
 
-.facility-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.facility-image img,
+.facility-image video,
+.facility-gallery-grid > video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
     transition: transform 0.5s;
+    cursor: pointer;
 }
 
-.facility-image:hover img {
-    transform: scale(1.05);
+.facility-image:hover img,
+.facility-image:hover video,
+.facility-gallery-grid > video:hover {
+    transform: scale(1.03);
 }
 
 /* ================= SPECIAL FACILITIES ================= */
@@ -1238,12 +1358,25 @@ img {
         grid-template-columns: 1fr;
     }
 
-    .gallery-item.large {
-        grid-row: auto;
-        height: 300px;
+    .gallery-item,
+    .gallery-item.large,
+    .space-image,
+    .facility-image {
+        grid-row: auto !important;
+        height: 240px !important;
     }
-    .gallery-item {
-        height: 260px;
+
+    .lightbox-overlay {
+        padding: 20px;
+    }
+
+    .lightbox-overlay img,
+    .lightbox-overlay video,
+    video.playing,
+    video.active-video,
+    video.playing-popup {
+        max-width: 88vw !important;
+        max-height: 75vh !important;
     }
 
     .gallery-heading {
@@ -1281,10 +1414,41 @@ img {
         grid-template-columns: 1fr;
     }
 }
+
 /* Past dates: dimmed, strikethrough, unclickable */
 .calendar-day-box.is-past {
     opacity: 0.35;
     cursor: not-allowed;
     text-decoration: line-through;
     pointer-events: none;
+}
+/* Centered Play Icon on Video Thumbnails */
+.gallery-item:has(video)::after,
+.space-image:has(video)::after,
+.facility-image:has(video)::after {
+    content: "▶";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 54px;
+    height: 54px;
+    background: rgba(0, 0, 0, 0.65);
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    padding-left: 4px;
+    pointer-events: none; /* Lets your tap pass right through to the video */
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.gallery-item:has(video):hover::after,
+.space-image:has(video):hover::after,
+.facility-image:has(video):hover::after {
+    background: #a87939;
+    transform: translate(-50%, -50%) scale(1.1);
 }
