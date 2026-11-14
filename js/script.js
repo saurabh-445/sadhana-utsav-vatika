@@ -1274,26 +1274,41 @@ window.addEventListener("DOMContentLoaded", updateActiveNavbar);
 window.addEventListener("scroll", updateActiveNavbar);
 
 /* ================= LIGHTBOX POPUP LOGIC ================= */
+/* ================= LIGHTBOX POPUP LOGIC ================= */
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightbox-img");
 const closeBtn = document.querySelector(".lightbox-close");
+
+function closeLightbox(fromBackButton = false) {
+    if (lightbox && lightbox.style.display === "flex") {
+        lightbox.style.display = "none";
+        if (!fromBackButton && history.state && history.state.lightboxOpen) {
+            history.back();
+        }
+    }
+}
 
 // 1. Automatically find all gallery images
 const galleryImages = document.querySelectorAll(".facility-image img, .space-image img, .gallery-section img");
 
 // 2. When any image is clicked, open the popup
 galleryImages.forEach(image => {
+    image.style.cursor = "pointer";
     image.addEventListener("click", () => {
-        image.style.cursor = "pointer"; // Makes it look clickable
-        lightbox.style.display = "flex"; // Show the dark background
-        lightboxImg.src = image.src; // Put the clicked image into the popup
+        if (lightbox && lightboxImg) {
+            lightbox.style.display = "flex";
+            lightboxImg.src = image.src;
+            if (!history.state || !history.state.lightboxOpen) {
+                history.pushState({ lightboxOpen: true }, "");
+            }
+        }
     });
 });
 
 // 3. Close the popup when the 'X' is clicked
 if (closeBtn) {
     closeBtn.addEventListener("click", () => {
-        lightbox.style.display = "none";
+        closeLightbox(false);
     });
 }
 
@@ -1301,7 +1316,7 @@ if (closeBtn) {
 if (lightbox) {
     lightbox.addEventListener("click", (e) => {
         if (e.target !== lightboxImg) {
-            lightbox.style.display = "none";
+            closeLightbox(false);
         }
     });
 }
@@ -1309,72 +1324,110 @@ if (lightbox) {
 // Force refresh if navigating back from a sub-page via BFCache
 window.addEventListener('pageshow', function (event) {
     if (event.persisted) {
-        // This detects if the user used the Back button, and silently reloads 
-        // the page to fetch the updated language from localStorage.
         window.location.reload();
     }
 });
-// Play/Pause and expand video on the very first tap anywhere on the frame
+
+/* ================= VIDEO POPUP, MOBILE BACK BUTTON & AUTO-CLOSE ================= */
+function closeActiveVideo(fromBackButton = false) {
+    const activeVideos = document.querySelectorAll('video.playing-popup');
+    if (activeVideos.length > 0) {
+        activeVideos.forEach(v => {
+            v.pause();
+            v.classList.remove('playing-popup');
+            v.removeAttribute('controls');
+
+            // Exit native fullscreen if the mobile browser entered it
+            if (document.fullscreenElement) {
+                document.exitFullscreen().catch(() => {});
+            }
+
+            // Reset the video so the original poster thumbnail image reappears cleanly
+            v.load();
+        });
+
+        // Clean up the temporary history state if closed by video ending or tapping outside
+        if (!fromBackButton && history.state && history.state.videoPopupOpen) {
+            history.back();
+        }
+    }
+}
+
 document.querySelectorAll('video').forEach(video => {
-    // 1. Hide native controls while in thumbnail view so the browser doesn't block the first tap
+    // 1. Hide default controls in thumbnail view so the very first tap plays the video
     video.removeAttribute('controls');
 
-    // 2. Tap anywhere on the video surface to play/pause immediately
-    video.addEventListener('click', (e) => {
-        e.stopPropagation();
+    const container = video.closest('.gallery-item, .space-image, .facility-image') || video;
 
-        // Only manually toggle when in thumbnail mode (once expanded, native controls handle it)
+    // 2. Tap anywhere on the video card to start playing immediately
+    container.addEventListener('click', (e) => {
+        e.stopPropagation();
         if (!video.classList.contains('playing-popup')) {
             video.play();
         }
     });
 
-    // 3. Also allow clicking the parent container (if any padding/wrapper is clicked)
-    const parent = video.parentElement;
-    if (parent && !parent.classList.contains('gallery-grid')) {
-        parent.addEventListener('click', (e) => {
-            if (e.target !== video && video.paused) {
-                video.play();
-            }
-        });
-    }
-
-    // 4. When video starts playing: pop out to original ratio and enable controls
+    // 3. When video starts playing: pop out to original ratio and enable controls
     video.addEventListener('play', () => {
-        // Pause any other playing videos first
+        // If another video is already open, close and reset it first
         document.querySelectorAll('video.playing-popup').forEach(otherVideo => {
             if (otherVideo !== video) {
                 otherVideo.pause();
+                otherVideo.classList.remove('playing-popup');
+                otherVideo.removeAttribute('controls');
+                otherVideo.load();
             }
         });
 
-        video.classList.add('playing-popup');
-        video.setAttribute('controls', 'controls');
+        // Pop out the video and push history state for mobile Back button
+        if (!video.classList.contains('playing-popup')) {
+            video.classList.add('playing-popup');
+            video.setAttribute('controls', 'controls');
+            if (!history.state || !history.state.videoPopupOpen) {
+                history.pushState({ videoPopupOpen: true }, "");
+            }
+        }
     });
 
-    // 5. When ended, return back to the grid thumbnail and hide controls again
+    // 4. Automatically close and restore poster thumbnail when the video finishes playing
     video.addEventListener('ended', () => {
-        video.classList.remove('playing-popup');
-        video.removeAttribute('controls');
+        closeActiveVideo(false);
     });
 });
 
-// Close the popped-out video when clicking anywhere outside of it or pressing Escape
-document.addEventListener('click', (e) => {
+// 5. Mobile Back Button: close open video or open photo instead of leaving the website
+window.addEventListener('popstate', () => {
     const activeVideo = document.querySelector('video.playing-popup');
-    if (activeVideo && !activeVideo.contains(e.target)) {
-        activeVideo.pause();
-        activeVideo.classList.remove('playing-popup');
-        activeVideo.removeAttribute('controls');
+    if (activeVideo) {
+        closeActiveVideo(true);
+    }
+    if (lightbox && lightbox.style.display === "flex") {
+        closeLightbox(true);
     }
 });
 
+// 6. If user exits native mobile fullscreen via phone Back button, also close popup cleanly
+document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) {
+        const activeVideo = document.querySelector('video.playing-popup');
+        if (activeVideo && activeVideo.paused) {
+            closeActiveVideo(false);
+        }
+    }
+});
+
+// 7. Tap anywhere on the dark backdrop outside the video to close it
+document.addEventListener('click', (e) => {
+    const activeVideo = document.querySelector('video.playing-popup');
+    if (activeVideo && !activeVideo.contains(e.target)) {
+        closeActiveVideo(false);
+    }
+});
+
+// 8. Press Escape key on laptop to close open video or photo
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-        document.querySelectorAll('video.playing-popup').forEach(v => {
-            v.pause();
-            v.classList.remove('playing-popup');
-            v.removeAttribute('controls');
-        });
+        closeActiveVideo(false);
+        closeLightbox(false);
     }
 });
