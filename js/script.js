@@ -1328,9 +1328,17 @@ window.addEventListener('pageshow', function (event) {
     }
 });
 
-/* ================= VIDEO POPUP, MOBILE BACK BUTTON & AUTO-CLOSE ================= */
+/* ================= VIDEO POPUP, CUT BUTTON, MOBILE BACK & AUTO-CLOSE ================= */
+// Automatically create the '×' cut button for videos on any page
+const videoCloseBtn = document.createElement("span");
+videoCloseBtn.className = "video-close-btn";
+videoCloseBtn.innerHTML = "&times;";
+document.body.appendChild(videoCloseBtn);
+
 function closeActiveVideo(fromBackButton = false) {
     const activeVideos = document.querySelectorAll('video.playing-popup');
+    videoCloseBtn.classList.remove('active'); // Hide the '×' cut button
+
     if (activeVideos.length > 0) {
         activeVideos.forEach(v => {
             v.pause();
@@ -1346,12 +1354,18 @@ function closeActiveVideo(fromBackButton = false) {
             v.load();
         });
 
-        // Clean up the temporary history state if closed by video ending or tapping outside
+        // Clean up the temporary history state if closed by X button, video ending, or tapping outside
         if (!fromBackButton && history.state && history.state.videoPopupOpen) {
             history.back();
         }
     }
 }
+
+// Close video when the '×' cut button is clicked/tapped
+videoCloseBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    closeActiveVideo(false);
+});
 
 document.querySelectorAll('video').forEach(video => {
     // 1. Hide default controls in thumbnail view so the very first tap plays the video
@@ -1367,9 +1381,8 @@ document.querySelectorAll('video').forEach(video => {
         }
     });
 
-    // 3. When video starts playing: pop out to original ratio and enable controls
+    // 3. When video starts playing: pop out, show '×' button, and enable controls
     video.addEventListener('play', () => {
-        // If another video is already open, close and reset it first
         document.querySelectorAll('video.playing-popup').forEach(otherVideo => {
             if (otherVideo !== video) {
                 otherVideo.pause();
@@ -1379,17 +1392,18 @@ document.querySelectorAll('video').forEach(video => {
             }
         });
 
-        // Pop out the video and push history state for mobile Back button
         if (!video.classList.contains('playing-popup')) {
             video.classList.add('playing-popup');
             video.setAttribute('controls', 'controls');
+            videoCloseBtn.classList.add('active'); // Show the '×' cut button
+
             if (!history.state || !history.state.videoPopupOpen) {
                 history.pushState({ videoPopupOpen: true }, "");
             }
         }
     });
 
-    // 4. Automatically close and restore poster thumbnail when the video finishes playing
+    // 4. Automatically close and hide '×' button when the video finishes playing
     video.addEventListener('ended', () => {
         closeActiveVideo(false);
     });
@@ -1401,7 +1415,7 @@ window.addEventListener('popstate', () => {
     if (activeVideo) {
         closeActiveVideo(true);
     }
-    if (lightbox && lightbox.style.display === "flex") {
+    if (typeof lightbox !== 'undefined' && lightbox && lightbox.style.display === "flex") {
         closeLightbox(true);
     }
 });
@@ -1419,7 +1433,7 @@ document.addEventListener('fullscreenchange', () => {
 // 7. Tap anywhere on the dark backdrop outside the video to close it
 document.addEventListener('click', (e) => {
     const activeVideo = document.querySelector('video.playing-popup');
-    if (activeVideo && !activeVideo.contains(e.target)) {
+    if (activeVideo && !activeVideo.contains(e.target) && e.target !== videoCloseBtn) {
         closeActiveVideo(false);
     }
 });
@@ -1428,6 +1442,8 @@ document.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeActiveVideo(false);
-        closeLightbox(false);
+        if (typeof closeLightbox === 'function') {
+            closeLightbox(false);
+        }
     }
 });

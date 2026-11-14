@@ -1461,3 +1461,34 @@ video:-webkit-full-screen {
     background: #a87939;
     transform: translate(-50%, -50%) scale(1.1);
 }
+/* ================= VIDEO POPUP CUT (X) BUTTON ================= */
+.video-close-btn {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 45px;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 100000;
+    user-select: none;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.video-close-btn:hover {
+    color: #ccc;
+}
+
+.video-close-btn.active {
+    display: block;
+}
+
+@media (max-width: 600px) {
+    .video-close-btn {
+        top: 18px;
+        right: 25px;
+        font-size: 42px;
+    }
+}
