@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="seatingArenaPageTitle">Seating Arena | Sadhana Utsav Vatika</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+    <header class="navbar">
+        <a href="../index.html" class="logo">
+            <span>SUV</span>
+            <div>
+                <strong>SADHANA</strong>
+                <small>UTSAV VATIKA</small>
+            </div>
+        </a>
+
+        <nav class="nav-links">
+            <a href="../index.html" data-key="home">Home</a>
+            <a href="../index.html#why-choose-us" data-key="whyChooseUs">Why Choose Us</a>
+            <a href="../index.html#facilities" data-key="facilities">Facilities</a>
+            <a href="../special-facilities.html" data-key="specialFacilities">Special Facilities</a>
+            <a href="../index.html#gallery" data-key="gallery">Gallery</a>
+            <a href="../index.html#contact" data-key="contact">Contact</a>
+            <a href="../about.html" data-key="aboutUs">About Us</a>
+        </nav>
+
+        <div class="nav-actions">
+            <div class="language-switch">
+                <button id="hinglishBtn" class="language active">Hinglish</button>
+                <button id="hindiBtn" class="language">हिन्दी</button>
+            </div>
+            <a href="../index.html#contact" class="nav-button" data-key="bookTour">Book a Tour</a>
+        </div>
+
+        <button class="menu-button" id="menuButton">☰</button>
+    </header>
+
+    <!-- ================= MOBILE MENU ================= -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="../index.html" data-key="home">Home</a>
+        <a href="../index.html#why-choose-us" data-key="whyChooseUs">Why Choose Us</a>
+        <a href="../index.html#facilities" data-key="facilities">Facilities</a>
+        <a href="../special-facilities.html" data-key="specialFacilities">Special Facilities</a>
+        <a href="../index.html#gallery" data-key="gallery">Gallery</a>
+        <a href="../index.html#contact" data-key="contact">Contact</a>
+        <a href="../about.html" data-key="aboutUs">About Us</a>
+
+        <div class="mobile-language">
+            <button id="mobileHinglishBtn" class="language active">Hinglish</button>
+            <button id="mobileHindiBtn" class="language">हिन्दी</button>
+        </div>
+        <a href="../index.html#contact" class="nav-button" data-key="bookTour">Book a Tour</a>
+    </div>
+
+    <!-- ================= SEATING ARENA ================= -->
+    <main>
+        <section class="space-page">
+            <button class="back-button" onclick="history.back()">
+                ← <span data-key="backButton">Back</span>
+            </button>
+
+            <div class="space-content">
+                <p class="section-label" data-key="seatingArenaLabel">SEATING ARENA</p>
+                <h1 data-key="seatingArenaDetailTitle">Comfortable Seating For Your Guests</h1>
+                <p data-key="seatingArenaDetailDescription">Spacious and well-arranged seating designed to keep your guests comfortable throughout the celebration.</p>
+
+                <!-- ================= SEATING DETAILS ================= -->
+                <div class="space-details">
+                    <h2 data-key="seatingArenaPointsTitle">Seating Arrangements</h2>
+                    <ul>
+                        <li data-key="seatingArenaPoint1">Spacious seating layout for all guests.</li>
+                        <li data-key="seatingArenaPoint2">Comfortable sofa and chair arrangements.</li>
+                        <li data-key="seatingArenaPoint3">Clear line of sight to the main stage.</li>
+                        <li data-key="seatingArenaPoint4">Dedicated VIP and family seating sections.</li>
+                        <li data-key="seatingArenaPoint5">Wide pathways for hassle-free movement.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ================= SEATING GALLERY ================= -->
+            <section class="space-gallery">
+                <div class="section-heading">
+                    <p class="section-label">
+                        <span data-key="seatingArenaGalleryLabel">SEATING ARENA GALLERY</span>
+                    </p>
+                    <h2 data-key="seatingArenaGalleryTitle">Comfortable Guest Experience</h2>
+                </div>
+                
+                <div class="space-gallery-grid">
+                    <div class="facility-image">
+                        <img src="../images/seating-arena/seating-1.jpg" alt="Stage" loading="lazy">
+                    </div>
+                    <div class="facility-image">
+                        <img src="../images/seating-arena/seating-2.jpeg" alt="Stage" loading="lazy">
+                    </div>
+                    <div class="facility-image">
+                        <video width="100%" controls preload="none" poster="../images/seating-arena/seating-1.jpg" style="height: 100%; object-fit: cover; border-radius: 8px;">
+                            <source src="../images/seating-arena/seating-3.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="facility-image">
+                        <video width="100%" controls preload="none" poster="../images/seating-arena/seating-11.png" style="height: 100%; object-fit: cover; border-radius: 8px;">
+                            <source src="../images/seating-arena/seating-4.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div>
+            <strong>SADHANA UTSAV VATIKA</strong>
+            <p data-key="footerText">Celebrating your special moments with elegance.</p>
+        </div>
+        <p>© 2026 Sadhana Utsav Vatika</p>
+    </footer>
+
+    <!-- ================= LIGHTBOX POPUP ================= -->
+    <div id="lightbox" class="lightbox-overlay">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="" alt="Full Screen Image">
+    </div> 
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
